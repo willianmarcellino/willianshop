@@ -1,0 +1,13 @@
+# python cache
+.mypy_cache
+
+# virtual enviroment
+.env
+.venv
+env
+venv
+
+# file
+*.drawio
+*.odt
+*.odt*
