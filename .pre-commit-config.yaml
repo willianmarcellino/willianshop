@@ -1,0 +1,57 @@
+repos:
+    -   repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v4.6.0
+        hooks:
+        -   id: trailing-whitespace
+        -   id: end-of-file-fixer
+        -   id: check-yaml
+        -   id: debug-statements
+        -   id: double-quote-string-fixer
+        -   id: name-tests-test
+        -   id: requirements-txt-fixer
+
+    -   repo: https://github.com/hhatto/autopep8
+        rev: v2.3.1
+        hooks:
+        -   id: autopep8
+            name: autopep8
+            description: A tool that automatically formats Python code to conform to the PEP 8 style guide.
+            entry: autopep8
+            language: python
+            types: [python]
+            args: [-i]
+
+    -   repo: https://github.com/PyCQA/flake8
+        rev: 7.1.0
+        hooks:
+        -   id: flake8
+            name: flake8
+            description: '`flake8` is a command-line utility for enforcing style consistency across Python projects.'
+            entry: flake8
+            language: python
+            types: [python]
+            require_serial: true
+
+    -   repo: https://github.com/pre-commit/mirrors-mypy
+        rev: 'v1.10.1'
+        hooks:
+        -   id: mypy
+            name: mypy
+            description: ''
+            entry: mypy
+            language: python
+            types: [python, pyi]
+            args: ["--ignore-missing-imports", "--scripts-are-modules"]
+            require_serial: true
+            additional_dependencies: [types-all]
+            minimum_pre_commit_version: '2.9.2'
+
+    -   repo: local
+        hooks:
+        -   id: requirements
+            name: requirements
+            description: 'update the requirements.txt file'
+            entry: bash -c '.venv/bin/pip3 freeze > requirements.txt; git add requirements.txt'
+            language: system
+            pass_filenames: false
+            stages: [commit]
